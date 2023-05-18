@@ -68,7 +68,7 @@ disambiguations:
 - extensions: ['.as']
   rules:
   - language: ActionScript
-    pattern: '^\s*(?:package(?:\s+[\w.]+)?\s+(?:\{|$)|import\s+[\w.*]+\s*;|(?=.*?(?:intrinsic|extends))(intrinsic\s+)?class\s+[\w<>.]+(?:\s+extends\s+[\w<>.]+)?|(?:(?:public|protected|private|static)\s+)*(?:(?:var|const|local)\s+\w+\s*:\s*[\w<>.]+(?:\s*=.*)?\s*;|function\s+\w+\s*\((?:\s*\w+\s*:\s*[\w<>.]+\s*(,\s*\w+\s*:\s*[\w<>.]+\s*)*)?\)))'
+    pattern: '^\s*(?:package(?:\s+[\w.]+)?\s+(?:\{|$)|import\s+[\w.*]+\s*;|intrinsic\s+class\s+[\w<>.]+|class\s+[\w<>.]+\s+extends\s+[\w<>.]+|(?:(?:public|protected|private|static)\s+)*(?:(?:var|const|local)\s+\w+\s*:\s*[\w<>.]+(?:\s*=.*)?\s*;|function\s+\w+\s*\((?:\s*\w+\s*:\s*[\w<>.]+\s*(,\s*\w+\s*:\s*[\w<>.]+\s*)*)?\)))'
 - extensions: ['.asc']
   rules:
   - language: Public Key
@@ -120,9 +120,9 @@ disambiguations:
     pattern: '^(?i:<pre\s+class)\s*=\s*(?:''metadata''|"metadata"|\bmetadata\b)[^>\r\n]*>'
   - language: BrighterScript
     pattern:
-    - (?i:^\s*(?=^sub\s)(?:sub\s*\w+\(.*?\))|(?::\s*sub\(.*?\))$)
+    - (?i:^sub\s+\w+\(.*?\)|:\s*sub\(.*?\)$)
     - (?i:^\s*(end\ssub)$)
-    - (?i:^\s*(?=^function\s)(?:function\s*\w+\(.*?\)\s*as\s*\w*)|(?::\s*function\(.*?\)\s*as\s*\w*)$)
+    - (?i:^function\s+\w+\(.*?\)\s*as\s*\w*|:\s*function\(.*?\)\s*as\s*\w*$)
     - (?i:^\s*(end\sfunction)$)
 - extensions: ['.builds']
   rules:
@@ -272,7 +272,7 @@ disambiguations:
 - extensions: ['.ftl']
   rules:
   - language: FreeMarker
-    pattern: '^(?:<|[a-zA-Z-][a-zA-Z0-9_-]+[ \t]+\w)|\$\{\w+[^\n]*?\}|^[ \t]*(?:<#--.*?-->|<#([a-z]+)(?=\s|>)[^>]*>.*?</#\1>|\[#--.*?--\]|\[#([a-z]+)(?=\s|\])[^\]]*\].*?\[#\2\])'
+    pattern: '^(?:<|[a-zA-Z-][a-zA-Z0-9_-]+[ \t]+\w)|\$\{\w+[^\n]*?\}|^[ \t]*(?:<#--.*?-->|<#([a-z]+)(?:\s[^>]*)?>.*?</#\1>|\[#--.*?--\]|\[#([a-z]+)(?:\s[^\]]*)?\].*?\[#\2\])'
   - language: Fluent
     pattern: '^-?[a-zA-Z][a-zA-Z0-9_-]* *=|\{\$-?[a-zA-Z][-\w]*(?:\.[a-zA-Z][-\w]*)?\}'
 - extensions: ['.g']
@@ -603,7 +603,7 @@ disambiguations:
 - extensions: ['.rno']
   rules:
   - language: RUNOFF
-    pattern: '(?i:^\.!|^\f|\f$|^\.end lit(?:eral)?\b|^\.[a-zA-Z].*?;\.[a-zA-Z](?:[; \t])|\^\*[^\s*][^*]*\\\*(?=$|\s)|^\.c;[ \t]*\w+)'
+    pattern: '(?i:^\.!|^\f|\f$|^\.end lit(?:eral)?\b|^\.[a-zA-Z].*?;\.[a-zA-Z](?:[; \t])|\^\*[^\s*][^*]*\\\*(?:$|\s)|^\.c;[ \t]*\w+)'
   - language: Roff
     pattern: '^\.\\" '
 - extensions: ['.rpy']
@@ -639,7 +639,7 @@ disambiguations:
 - extensions: ['.sol']
   rules:
   - language: Solidity
-    pattern: '\bpragma\s+solidity\b|\b(?:abstract\s+)?contract\s+(?!\d)[a-zA-Z0-9$_]+(?:\s+is\s+(?:[a-zA-Z0-9$_][^\{]*?)?)?\s*\{'
+    pattern: '\bpragma\s+solidity\b|\b(?:abstract\s+)?contract\s+[a-zA-Z$_][a-zA-Z0-9$_]*(?:\s+is\s+(?:[a-zA-Z0-9$_][^\{]*?)?)?\s*\{'
   - language: Gerber Image
     pattern: '^[DGMT][0-9]{2}\*\r?\n'
 - extensions: ['.sql']
@@ -675,7 +675,7 @@ disambiguations:
 - extensions: ['.stl']
   rules:
   - language: STL
-    pattern: '\A\s*solid(?=$|\s)(?:.|\n)*?^endsolid(?:$|\s)'
+    pattern: '\A\s*solid\s(?:.|\n)*?^endsolid(?:$|\s)'
 - extensions: ['.sw']
   rules:
   - language: Sway
